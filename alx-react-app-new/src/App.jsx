@@ -1,4 +1,5 @@
 import './App.css'
+import Counter from './components/Counter'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import MainContent from './components/MainContent'
@@ -11,6 +12,7 @@ function App() {
     <>
       <Header />
       <MainContent />
+      <Counter />
       <UserProfile />
       <Footer />
     </>
