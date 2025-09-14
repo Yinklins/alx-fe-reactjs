@@ -1,0 +1,22 @@
+body{
+    background-color: rgba(102, 154, 182, 0.267);
+    color: rgb(30, 94, 131);
+
+}
+.Navbar {
+    background-color: aqua;
+    padding: 20px 20px;
+    border-bottom: 1px thin purple;
+    box-shadow: 10px ;
+    
+}
+.links {
+    text-decoration: none;
+    border: 10px solid aqua;
+    padding: 10px;
+    background-color: blueviolet;
+    color: white;
+}
+.links:hover {
+    background-color: brown;
+}
