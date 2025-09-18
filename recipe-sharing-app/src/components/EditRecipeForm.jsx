@@ -20,8 +20,8 @@ function EditRecipeForm() {
     return <p className="text-red-500">Recipe not found!</p>;
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
     // ✅ pass correct object to store
     updateRecipe({ id: recipe.id, title, ingredients, instructions });
@@ -36,19 +36,19 @@ function EditRecipeForm() {
         type="text"
         value={title}
         placeholder="Recipe Title"
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(event) => setTitle(event.target.value)}
         className="w-full p-2 mb-2 border rounded"
       />
       <textarea
         value={ingredients}
         placeholder="Ingredients"
-        onChange={(e) => setIngredients(e.target.value)}
+        onChange={(event) => setIngredients(event.target.value)}
         className="w-full p-2 mb-2 border rounded"
       />
       <textarea
         value={instructions}
         placeholder="Instructions"
-        onChange={(e) => setInstructions(e.target.value)}
+        onChange={(event) => setInstructions(event.target.value)}
         className="w-full p-2 mb-2 border rounded"
       />
       <button
