@@ -39,6 +39,34 @@ const useRecipeStore = create((set, get) => ({
       ),
     })),
 
+
+  // --- Favorites ---
+  favorites: [],
+
+  addFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: state.favorites.includes(recipeId)
+        ? state.favorites
+        : [...state.favorites, recipeId],
+    })),
+
+  removeFavorite: (recipeId) =>
+    set((state) => ({
+      favorites: state.favorites.filter((id) => id !== recipeId),
+    })),
+
+  // --- Recommendations (mock logic) ---
+  recommendations: [],
+  generateRecommendations: () => {
+    const { recipes, favorites } = get();
+    const recommended = recipes.filter(
+      (recipe) =>
+        favorites.includes(recipe.id) && Math.random() > 0.5 // simple example
+    );
+    set({ recommendations: recommended });
+  },
+
+
   // Bulk setter
   setRecipes: (recipes) => set({ recipes }),
 }));

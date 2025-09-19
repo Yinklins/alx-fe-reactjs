@@ -4,6 +4,8 @@ import RecipeList from './components/RecipeList'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RecipeDetails from "./components/RecipeDetails";
 import EditRecipeForm from "./components/EditRecipeForm";
+import RecommendationsList from './components/RecommendationsList ';
+import FavoritesList from './components/FavoritesList ';
 
 
 
@@ -16,6 +18,8 @@ function App() {
       <h1>This is all about Adding new recipes </h1>
       <RecipeList />
       <AddRecipeForm />
+      <RecommendationsList />
+      <FavoritesList />
 
       <Router>
       <Routes>
