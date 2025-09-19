@@ -1,4 +1,4 @@
-import useRecipeStore from "./recipeStore";
+import useRecipeStore from "../store/recipeStore";
 import { useEffect } from "react";
 
 function RecommendationsList() {
