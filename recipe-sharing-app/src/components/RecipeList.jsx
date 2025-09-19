@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useRecipeStore from "./recipeStore";
 import SearchBar from "./SearchBar";
 
@@ -12,7 +13,13 @@ function RecipeList() {
         {filteredRecipes.length > 0 ? (
           filteredRecipes.map((recipe) => (
             <li key={recipe.id} className="p-2 border-b">
-              {recipe.title}
+              {/* ✅ Use Link for navigation */}
+              <Link
+                to={`/recipes/${recipe.id}`}
+                className="text-blue-500 hover:underline"
+              >
+                {recipe.title}
+              </Link>
             </li>
           ))
         ) : (
