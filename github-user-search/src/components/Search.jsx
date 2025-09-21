@@ -26,7 +26,7 @@ function Search() {
     } catch (err) {
       console.error("Fetch error:", err);
       setUser(null);
-      setError("Looks like we can’t find the user");
+      setError("Looks like we cant find the user");
     } finally {
       setLoading(false);
     }
