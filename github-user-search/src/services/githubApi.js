@@ -18,3 +18,8 @@ export const getUserDetails = async (username) => {
   const response = await api.get(`/users/${username}`);
   return response.data;
 };
+
+export const fetchUserData = async (username) => {
+  const response = await axios.get(`https://api.github.com/users/${username}`);
+  return response.data;
+};
