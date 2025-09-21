@@ -1,4 +1,4 @@
-import Search from "./components/searchBar";
+import Search from "./components/search";
 
 function App() {
   return (
