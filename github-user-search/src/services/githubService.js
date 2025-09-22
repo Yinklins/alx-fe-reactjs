@@ -1,39 +1,40 @@
+// src/services/githubService.js
 import axios from "axios";
-
-const GITHUB_API_URL = "https://api.github.com";
-
-const api = axios.create({
-  baseURL: GITHUB_API_URL,
-  headers: {
-    Authorization: `token ${import.meta.env.VITE_APP_GITHUB_API_KEY}`,
-  },
-});
-
-export const searchUsers = async (username) => {
-  const response = await api.get(`/search/users?q=${username}`);
-  return response.data;
-};
-
-export const getUserDetails = async (username) => {
-  const response = await api.get(`/users/${username}`);
-  return response.data;
-};
-
-export const fetchUserData = async (username) => {
-  const response = await axios.get(`https://api.github.com/users/${username}`);
-  return response.data;
-};
-
 
 const BASE_URL = "https://api.github.com";
 
-export const fetchAdvancedUsers = async (username, location, minRepos) => {
-  let query = "";
+// Fetch a single GitHub user by username
+export const fetchUserData = async (username) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/users/${username}`);
+    return response.data;
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw new Error("User not found");
+  }
+};
 
-  if (username) query += `${username} in:login `;
-  if (location) query += `location:${location} `;
-  if (minRepos) query += `repos:>=${minRepos}`;
+// Search GitHub users with advanced filters
+export const searchUsers = async ({ username, location, minRepos }) => {
+  try {
+    if (!username && !location && !minRepos) {
+      throw new Error("Please provide at least one search parameter");
+    }
 
-  const response = await axios.get(`${BASE_URL}/search/users?q=${query.trim()}`);
-  return response.data;
+    let queryParts = [];
+    if (username) queryParts.push(username);
+    if (location) queryParts.push(`location:${location}`);
+    if (minRepos) queryParts.push(`repos:>=${minRepos}`);
+
+    const query = queryParts.join(" ");
+
+    const response = await axios.get(
+      `${BASE_URL}/search/users?q=${encodeURIComponent(query)}`
+    );
+
+    return response.data.items; // returns an array of users
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    throw new Error("Failed to search users");
+  }
 };
