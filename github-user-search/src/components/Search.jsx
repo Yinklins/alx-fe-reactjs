@@ -1,13 +1,11 @@
-// src/components/Search.jsx
 import { useState } from "react";
-import { fetchUserData, fetchAdvancedUsers } from "../services/githubService"; // ✅ include both
+import { fetchUserData, searchUsers } from "../services/githubService";
 
 function Search() {
   const [username, setUsername] = useState("");
   const [location, setLocation] = useState("");
   const [minRepos, setMinRepos] = useState("");
   const [users, setUsers] = useState([]);
-  const [singleUser, setSingleUser] = useState(null); // ✅ handle single-user search
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -22,21 +20,18 @@ function Search() {
     setLoading(true);
     setError("");
     setUsers([]);
-    setSingleUser(null);
 
     try {
+      let data;
       if (username && !location && !minRepos) {
-        // ✅ simple username search
-        const data = await fetchUserData(username);
-        setSingleUser(data);
+        data = await fetchUserData(username); // returns [user]
       } else {
-        // ✅ advanced search
-        const data = await fetchAdvancedUsers(username, location, minRepos);
-        setUsers(data.items || []);
+        data = await searchUsers({ username, location, minRepos }); // returns array
       }
+      setUsers(data || []);
     } catch (err) {
       console.error(err);
-      setError("Looks like we cant find the user");
+      setError("Looks like we can't find the user");
     } finally {
       setLoading(false);
     }
@@ -80,29 +75,6 @@ function Search() {
       {loading && <p className="mt-4 text-gray-600">Loading...</p>}
       {error && <p className="mt-4 text-red-500">{error}</p>}
 
-      {/* ✅ Display single user if only username was searched */}
-      {singleUser && (
-        <div className="mt-6 flex items-center gap-4 p-4 border rounded bg-gray-50 shadow-sm">
-          <img
-            src={singleUser.avatar_url}
-            alt={singleUser.login}
-            className="w-16 h-16 rounded-full"
-          />
-          <div>
-            <h2 className="text-lg font-bold">{singleUser.login}</h2>
-            <a
-              href={singleUser.html_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 underline"
-            >
-              View Profile
-            </a>
-          </div>
-        </div>
-      )}
-
-      {/* ✅ Display multiple users for advanced search */}
       <div className="mt-6 space-y-4">
         {users.map((user) => (
           <div
