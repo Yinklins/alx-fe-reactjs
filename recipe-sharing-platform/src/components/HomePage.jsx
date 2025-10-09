@@ -5,7 +5,8 @@ import RecipeList from "./RecipeList";
     const [recipes, setRecipes] = useState(null);
     const [ isPending, setIsPending] = useState(true);
     useEffect(() => {
-        fetch('http://localhost:8000/recipes')
+        setTimeout(()=>{
+             fetch('/data/data.json')
         .then(res =>{
             return res.json();
         })
@@ -13,6 +14,9 @@ import RecipeList from "./RecipeList";
             setRecipes(data);
             setIsPending(false);
         });
+
+        },1000)
+       
     },[]);
 
     return(
