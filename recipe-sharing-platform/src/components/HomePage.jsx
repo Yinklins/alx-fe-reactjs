@@ -11,7 +11,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="Home p-6 bg-blue-50 rounded min-h-screen">
+    <div className="Home grid p-6 bg-blue-50 rounded min-h-screen">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
         Delicious Recipes 🍳
       </h1>
@@ -38,12 +38,21 @@ const Home = () => {
                   <p className="text-gray-600 mt-2 text-sm line-clamp-3">
                     {recipe.summary}
                   </p>
+                    
                 </div>
+                
               </div>
             </Link>
           ))}
+          
         </div>
       )}
+      <Link
+                        to="/add-recipe"
+                        className="inline-block mb-6 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+                        >
+                        ➕ Add New Recipe
+        </Link>
     </div>
   );
 };
