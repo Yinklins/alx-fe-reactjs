@@ -1,5 +1,4 @@
-{
-    "recipe":[
+[
   {
     "id": 1,
     "title": "Spaghetti Carbonara",
@@ -13,5 +12,3 @@
     "image": "https://via.placeholder.com/150"
   }
 ]
-
-}

@@ -1,18 +1,12 @@
-import './App.css'
-import Home from './components/HomePage'
-
+import React from "react";
+import HomePage from "./components/HomePage";
 
 function App() {
-  
-
   return (
-    <>
-    <div className='bg-gray-100 rounded p-5 h-auto w-auto'>
-      <h1 className='text-blue-500 font-extrabold text-3xl'>Food recipe platform</h1>
-      <Home />
+    <div>
+      <HomePage />
     </div>
-    </>
-  )
+  );
 }
 
-export default App
+export default App;
