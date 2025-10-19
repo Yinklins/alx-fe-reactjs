@@ -1,34 +1,25 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import About from "./components/About";
+import Blog from "./components/Blog";
+import BlogPost from "./components/BlogPost"; // ✅ Make sure this file exists
 import Profile from "./components/Profile";
-import ProfileDetails from "./components/ProfileDetails";
-import ProfileSettings from "./components/ProfileSettings";
-import Post from "./components/Post";
-import ProtectedRoute from "./components/ProtectedRoute";
+import NotFound from "./components/NotFound";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/blog" element={<Blog />} />
+        {/* ✅ Dynamic Route for Blog Posts */}
+        <Route path="/blog/:id" element={<BlogPost />} />
 
-        {/* ✅ Protected Route Example */}
-        <Route
-          path="/profile/*"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
+        {/* Profile (can include nested/protected routes) */}
+        <Route path="/profile/*" element={<Profile />} />
 
-        {/* ✅ Dynamic Route Example */}
-        <Route path="/post/:postId" element={<Post />} />
-
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" />} />
+        {/* 404 Page */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
