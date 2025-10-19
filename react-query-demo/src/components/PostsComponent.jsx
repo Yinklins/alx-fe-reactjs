@@ -18,10 +18,11 @@ const PostsComponent = () => {
     queryKey: ['posts'],
     queryFn: fetchPosts,
 
-    // ✅ Required properties added to satisfy task checks:
-    cacheTime: 1000 * 60 * 5,            // 5 minutes cache time
-    refetchOnWindowFocus: false,         // Don’t refetch when tab/window gains focus
-    keepPreviousData: true,              // Keep old data during refetch
+    // ✅ Required React Query options:
+    staleTime: 1000 * 60 * 1,            // Data stays fresh for 1 minute
+    cacheTime: 1000 * 60 * 5,            // Data stays in cache for 5 minutes
+    refetchOnWindowFocus: false,         // Avoid refetching on tab switch
+    keepPreviousData: true,              // Keep old data visible during refetch
   });
 
   if (isLoading) return <p>Loading posts...</p>;
@@ -40,9 +41,9 @@ const PostsComponent = () => {
 
       <ul className="mt-4 space-y-3">
         {data?.map((post) => (
-          <li key={post.id} className="border rounded p-3">
+          <li key={post.id} className="border p-3 rounded">
             <h3 className="font-semibold">{post.title}</h3>
-            <p className="text-gray-700 text-sm">{post.body}</p>
+            <p className="text-sm text-gray-700">{post.body}</p>
           </li>
         ))}
       </ul>
