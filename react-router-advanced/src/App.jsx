@@ -5,6 +5,8 @@ import Blog from "./components/Blog";
 import BlogPost from "./components/BlogPost"; // ✅ Make sure this file exists
 import Profile from "./components/Profile";
 import NotFound from "./components/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
 
         {/* 404 Page */}
         <Route path="*" element={<NotFound />} />
+        <Route path="/ProtectedRoute" element={<ProtectedRoute />} />
       </Routes>
     </Router>
   );
